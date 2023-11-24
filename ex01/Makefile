@@ -6,14 +6,14 @@
 #    By: agengemb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:01:24 by agengemb          #+#    #+#              #
-#    Updated: 2023/11/22 14:53:27 by agengemb         ###   ########.fr        #
+#    Updated: 2023/11/24 15:55:06 by agengemb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 NAME = first_cog
-SRC= ScalarConverter.cpp main.cpp
+SRC= Serializer.cpp main.cpp
 OBJ= $(SRC:.cpp=.o)
 DEP= ${OBJ:.o=.d}
 

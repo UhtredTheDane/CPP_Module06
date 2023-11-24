@@ -6,14 +6,14 @@
 /*   By: agengemb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:18:22 by agengemb          #+#    #+#             */
-/*   Updated: 2023/11/22 16:19:09 by agengemb         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:55:49 by agengemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef B_HPP
 # define B_HPP
 
-# include "B_HPP"
+# include "Base.hpp"
 
 class B: public Base
 {
