@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 //std::stringstream
+
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(void)
@@ -48,39 +49,49 @@ static void convertInChar(int int_value)
 	} 
 	std::cout << std::endl;
 }
-/*
-static void convertInInt()
+
+static void convertInFloat(std::string& value)
 {
-	
-}*/
+	std::stringstream test;
+	float float_value;
+
+	test << value;	
+	test >> float_value;
+	std::cout << "float: " << float_value << "f" << std::endl;
+}
+
+static void convertInDouble(std::string& value)
+{
+	std::stringstream test;
+	double double_value;
+
+	test << value;	
+	test >> double_value;
+	std::cout << "double: " << double_value << std::endl;
+}
 
 void ScalarConverter::convert(std::string value)
 {
 	std::stringstream test;
-	float int_value;
-	
+	int int_value;
+	double coco = 1.79769e+308;
+	std::cout << coco << std::endl;
 	test << value;	
 	test >> int_value;
-	std::cout << int_value << std::endl;
-	if (!test.eof())	
+	if (!test.eof())
 		std::cout << "Bad input" << std::endl;
-	
+	std::cout << std::numeric_limits<long>::max() << std::endl;
+	std::cout << std::numeric_limits<float>::max() << std::endl;
+	std::cout << std::numeric_limits<double>::max() << std::endl;
+	if (int_value > 2147483647 || int_value < -2147483648)
+	{
 
-	
-	/*test.str("");
-	test.clear();
-	test << value;	
-	float float_value = 0.0f;
-	test >> float_value;
+	}
 
-	test.str("");
-	test.clear();
-	test << value;	
-	double double_value;
-	test >> double_value;*/
-
+	//long coco = 9223372036854775808;
+	//std::cout << coco << std::endl;
 	convertInChar(int_value);
-	/*std::cout << "int: " << int_value << std::endl;
-	std::cout << "float: " << float_value + 0.0 << std::endl;
-	std::cout << "double: " << double_value << std::endl;*/
+	std::cout << "int: " << int_value << std::endl;
+	convertInFloat(value);
+	convertInDouble(value);
 }
