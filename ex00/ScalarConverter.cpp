@@ -35,63 +35,93 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& toAffect)
 	return (*this);
 }
 
-static void convertInChar(int int_value)
+static void convertInChar(long double first_value, bool nan, bool infp, bool infm)
 {
 	std::cout << "char: ";
-	if (int_value < 0 || int_value > 127)
+	if (first_value < 0 || first_value > 127 || nan || infp || infm)
 		std::cout << "impossible";
 	else
 	{
-		if ((int_value >=0 && int_value <= 31) || int_value == 127)
+		if ((first_value >= 0 && first_value <= 31) || first_value == 127)
 			std::cout << "not displayable";
 		else
-			std::cout << static_cast<char>(int_value);
-	} 
+			std::cout << static_cast<char>(first_value);
+	}
 	std::cout << std::endl;
 }
 
-static void convertInFloat(std::string& value)
+static void convertInInt(long double first_value, bool nan, bool infp, bool infm)
 {
-	std::stringstream test;
-	float float_value;
-
-	test << value;	
-	test >> float_value;
-	std::cout << "float: " << float_value << "f" << std::endl;
+	std::cout << "int: ";
+	if (first_value < INT_MIN || first_value > INT_MAX || nan || infp || infm)
+		std::cout << "impossible";
+	else
+		std::cout << static_cast<int>(first_value);
+	std::cout << std::endl;
 }
 
-static void convertInDouble(std::string& value)
+
+void convertInFloat(long double first_value, bool nan, bool infp, bool infm)
 {
-	std::stringstream test;
+	std::cout << "float: ";
+	if (first_value < FLT_MAX * -1 || first_value > FLT_MAX)
+		std::cout << "impossible";
+	else if(nan)
+		std::cout << "nanf";
+	else if (infp)
+		std::cout << "+inff";
+	else if (infm)
+		std::cout << "-inff";
+	else
+		std::cout << static_cast<float>(first_value) << "f";
+	std::cout << std::endl;
+}
+
+static void convertInDouble(long double first_value, bool nan, bool infp, bool infm)
+{
 	double double_value;
 
-	test << value;	
-	test >> double_value;
-	std::cout << "double: " << double_value << std::endl;
+	std::cout << "double: ";
+	if (first_value < DBL_MAX * -1 || first_value > DBL_MAX)
+		std::cout << "impossible";
+	else if(nan)
+		std::cout << "nan";
+	else if (infp)
+		std::cout << "+inf";
+	else if (infm)
+		std::cout << "-inf";
+	else
+		std::cout << static_cast<double>(first_value);
+	std::cout << std::endl;
 }
 
 void ScalarConverter::convert(std::string value)
 {
 	std::stringstream test;
-	int int_value;
-	double coco = 1.79769e+308;
-	std::cout << coco << std::endl;
-	test << value;	
-	test >> int_value;
-	if (!test.eof())
-		std::cout << "Bad input" << std::endl;
-	std::cout << std::numeric_limits<long>::max() << std::endl;
-	std::cout << std::numeric_limits<float>::max() << std::endl;
-	std::cout << std::numeric_limits<double>::max() << std::endl;
-	if (int_value > 2147483647 || int_value < -2147483648)
-	{
+	long double first_value;
+	bool nan;
+	bool infp;
+	bool infm;
 
+	first_value = 0;
+	nan = false;
+	infp = false;
+	infm = false;
+	if (value.compare("nan") == 0)
+		nan = true;
+	else if (value.compare("+inf") == 0)
+		infp = true;
+	else if (value.compare("-inf") == 0)
+		infm = true;
+	else
+	{	
+		test << value;	
+		test >> first_value;
+		if (!test.eof())
+			std::cout << "Bad input" << std::endl;
 	}
-
-	//long coco = 9223372036854775808;
-	//std::cout << coco << std::endl;
-	convertInChar(int_value);
-	std::cout << "int: " << int_value << std::endl;
-	convertInFloat(value);
-	convertInDouble(value);
+	convertInChar(first_value, nan, infp, infm);
+	convertInInt(first_value, nan, infp, infm);
+	convertInFloat(first_value, nan, infp, infm);
+	convertInDouble(first_value, nan, infp, infm);
 }
