@@ -16,11 +16,11 @@
 int main(void)
 {
 	Data data = {.x = 10, .y = 12};
-	uintptr_t test;
+	uintptr_t temp;
 	Data *res;
 
-	test = Serializer::serialize(&data);
-	res = Serializer::deserialize(test);
+	temp = Serializer::serialize(&data);
+	res = Serializer::deserialize(temp);
 	if (&data == res)
 	{
 		std::cout << "ptr: " << &data << std::endl;
