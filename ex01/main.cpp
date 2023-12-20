@@ -12,12 +12,11 @@
 
 #include "Serializer.hpp"
 #include <iostream>
-#include <stdlib.h>
 
 int main(void)
 {
-	Data *ptr = (Data *) malloc(sizeof(Data));
-	uintptr_t test = Serializer::serialize(ptr);
+	Data ptr = {.x = 10, .y = 12};
+	uintptr_t test = Serializer::serialize(&ptr);
 	Data *res = Serializer::deserialize(test);
 	if (ptr == res)
 	{
