@@ -6,7 +6,7 @@
 /*   By: agengemb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:07:07 by agengemb          #+#    #+#             */
-/*   Updated: 2023/11/24 16:27:34 by agengemb         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:39:39 by agengemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 int main(void)
 {
-	Data ptr = {.x = 10, .y = 12};
-	uintptr_t test = Serializer::serialize(&ptr);
-	Data *res = Serializer::deserialize(test);
-	if (ptr == res)
+	Data data = {.x = 10, .y = 12};
+	uintptr_t test;
+	Data *res;
+
+	test = Serializer::serialize(&data);
+	res = Serializer::deserialize(test);
+	if (&data == res)
 	{
-		std::cout << "ptr: " << ptr << std::endl;
+		std::cout << "ptr: " << &data << std::endl;
 		std::cout << "res: " << res << std::endl;
 	}
 	return (0);

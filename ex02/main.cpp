@@ -6,7 +6,7 @@
 /*   By: agengemb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:17:11 by agengemb          #+#    #+#             */
-/*   Updated: 2023/11/24 18:13:37 by agengemb         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:42:05 by agengemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
-#include <typeinfo>
 
 Base * generate(void)
 {
@@ -32,7 +31,6 @@ Base * generate(void)
 	}
 	return (res);
 }
-
 
 void identify(Base* p)
 {
@@ -51,7 +49,7 @@ void identify(Base& p)
 		(void) dynamic_cast<A&>(p);
 		std::cout << "Type A" << std::endl;
 	}
-	catch (std::bad_cast)
+	catch (std::exception& e)
 	{
 		std::cout << "Pas A" << std::endl;
 	}
@@ -60,7 +58,7 @@ void identify(Base& p)
 		(void) dynamic_cast<B&>(p);
 		std::cout << "Type B" << std::endl;
 	}
-	catch (std::bad_cast)
+	catch (std::exception& e)
 	{
 		std::cout << "Pas B" << std::endl;
 	}
@@ -69,7 +67,7 @@ void identify(Base& p)
 		(void) dynamic_cast<C&>(p);
 		std::cout << "Type C" << std::endl;
 	}
-	catch (std::bad_cast)
+	catch (std::exception& e)
 	{
 		std::cout << "Pas C" << std::endl;
 	}
@@ -82,6 +80,6 @@ int main(void)
 	identify(test);
 	std::cout << std::endl;
 	identify(*test);
-	delete(test);
+	delete (test);
 	return (0);
 }
