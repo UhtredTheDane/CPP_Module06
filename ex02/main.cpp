@@ -82,5 +82,6 @@ int main(void)
 	identify(test);
 	std::cout << std::endl;
 	identify(*test);
+	delete(test);
 	return (0);
 }
