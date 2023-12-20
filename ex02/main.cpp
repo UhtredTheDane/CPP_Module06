@@ -21,8 +21,7 @@ Base * generate(void)
 {
 	int random_value;
 	Base *res;
-	random_value = rand()%3;
-	std::cout << random_value << std::endl;
+	random_value = rand() % 3;
 	switch (random_value)
 	{
 		case 0: res = new A();
@@ -56,6 +55,24 @@ void identify(Base& p)
 	{
 		std::cout << "Pas A" << std::endl;
 	}
+	try
+	{
+		(void) dynamic_cast<B&>(p);
+		std::cout << "Type B" << std::endl;
+	}
+	catch (std::bad_cast)
+	{
+		std::cout << "Pas B" << std::endl;
+	}
+	try
+	{
+		(void) dynamic_cast<C&>(p);
+		std::cout << "Type C" << std::endl;
+	}
+	catch (std::bad_cast)
+	{
+		std::cout << "Pas C" << std::endl;
+	}
 }
 
 int main(void)
@@ -63,6 +80,7 @@ int main(void)
 	srand(time(0));
 	Base *test = generate();
 	identify(test);
+	std::cout << std::endl;
 	identify(*test);
 	return (0);
 }

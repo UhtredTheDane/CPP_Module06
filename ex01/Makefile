@@ -12,7 +12,7 @@
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
-NAME = first_cog
+NAME = reinterpret_cast
 SRC= Serializer.cpp main.cpp
 OBJ= $(SRC:.cpp=.o)
 DEP= ${OBJ:.o=.d}

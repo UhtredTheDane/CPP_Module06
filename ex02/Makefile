@@ -12,7 +12,7 @@
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
-NAME = first_cog
+NAME = dynamic_cast
 SRC= A.cpp B.cpp C.cpp Base.cpp main.cpp
 OBJ= $(SRC:.cpp=.o)
 DEP= ${OBJ:.o=.d}

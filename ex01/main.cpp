@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
-#include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
 
 int main(void)
@@ -21,8 +21,8 @@ int main(void)
 	Data *res = Serializer::deserialize(test);
 	if (ptr == res)
 	{
-		printf("ptr: %p\n", ptr);
-		printf("res: %p\n", res);
+		std::cout << "ptr: " << ptr << std::endl;
+		std::cout << "res: " << res << std::endl;
 	}
 	return (0);
 }

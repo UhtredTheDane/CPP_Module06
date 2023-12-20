@@ -121,11 +121,13 @@ void ScalarConverter::convert(std::string value)
 	symbol = checkSymbol(value);
 	if (!symbol)
 	{
-		if (value.find('.'))
+		if (value.find('.') == std::string::npos)
 			symbol = 1;
 		test << value;
 		test >> first_value;
 		test >> remainder;
+		std::cout << value << std::endl;
+		std::cout << first_value << std::endl;
 		if (!test.eof() || (remainder.size() > 0 && remainder.compare("f")))
 		{
 			std::cout << "Bad input" << std::endl;
