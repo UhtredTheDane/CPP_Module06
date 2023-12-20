@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <iomanip> 
 
 ScalarConverter::ScalarConverter(void)
 {
@@ -58,7 +59,7 @@ static void convertInInt(long double first_value, int symbol)
 	std::cout << std::endl;
 }
 
-void convertInFloat(long double first_value, int symbol)
+static void convertInFloat(long double first_value, int symbol)
 {
 	std::cout << "float: ";
 	if (first_value < FLT_MAX * -1 || first_value > FLT_MAX)
@@ -99,7 +100,7 @@ static void convertInDouble(long double first_value, int symbol)
 	std::cout << std::endl;
 }
 
-int checkSymbol(std::string value)
+static int checkSymbol(std::string value)
 {
 	if (value.compare("nan") == 0 || value.compare("nanf") == 0)
 		return (2);
@@ -108,6 +109,26 @@ int checkSymbol(std::string value)
 	else if (value.compare("-inf") == 0)
 		return (4);
 	return (0);
+}
+
+static bool isWholeNumber(std::string value)
+{
+	size_t pos;
+	const char *str;
+
+	pos = value.find('.');
+	if (pos == std::string::npos)
+		return (true);
+	else
+	{
+		str = value.c_str();
+		while (*(++str + pos) != '\0')
+		{
+			if (*(str + pos) != '0' && *(str + pos) != 'f')
+				return (false);
+		}
+	}
+	return (true);
 }
 
 void ScalarConverter::convert(std::string value)
@@ -121,13 +142,11 @@ void ScalarConverter::convert(std::string value)
 	symbol = checkSymbol(value);
 	if (!symbol)
 	{
-		if (value.find('.') == std::string::npos)
+		if (isWholeNumber(value))
 			symbol = 1;
 		test << value;
 		test >> first_value;
 		test >> remainder;
-		std::cout << value << std::endl;
-		std::cout << first_value << std::endl;
 		if (!test.eof() || (remainder.size() > 0 && remainder.compare("f")))
 		{
 			std::cout << "Bad input" << std::endl;

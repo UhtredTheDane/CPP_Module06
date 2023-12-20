@@ -12,7 +12,7 @@
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
-NAME = static_cast
+NAME = convert
 SRC= ScalarConverter.cpp main.cpp
 OBJ= $(SRC:.cpp=.o)
 DEP= ${OBJ:.o=.d}
